@@ -1,6 +1,6 @@
 import { pathToFileURL } from 'node:url';
 import path from 'node:path';
-import sass from 'sass';
+import { compileString, NodePackageImporter } from 'sass';
 import { transform } from 'lightningcss';
 import type { Transformer } from '@jest/transform';
 
@@ -22,9 +22,9 @@ const transformer: Transformer<JestCssModulesTransformOptions> = {
 
       case '.sass':
       case '.scss': {
-        cssCode = sass.compileString(sourceText, {
+        cssCode = compileString(sourceText, {
           url: pathToFileURL(sourcePath) as URL,
-          importers: [new sass.NodePackageImporter()],
+          importers: [new NodePackageImporter()],
         }).css;
         break;
       }
