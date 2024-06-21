@@ -1,6 +1,6 @@
 # Jest transformer for css-modules
 
-This package is needed for transform css-modules.
+This package is needed for transform css-modules in Jest.
 
 It supports CSS, Sass and SCSS.
 
