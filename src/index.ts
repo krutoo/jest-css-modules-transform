@@ -12,11 +12,11 @@ const transformer: Transformer<JestCssModulesTransformOptions> = {
   process(sourceText, sourcePath, options) {
     const extname = path.extname(sourcePath);
 
-    let cssCode;
+    let cssCode: string;
 
     switch (extname) {
       case '.css': {
-        cssCode = sourcePath;
+        cssCode = sourceText;
         break;
       }
 
@@ -30,7 +30,11 @@ const transformer: Transformer<JestCssModulesTransformOptions> = {
       }
 
       default: {
-        throw new Error(`[@krutoo/jest-css-modules-transform] Unsupported extension "${extname}"`);
+        cssCode = sourceText;
+
+        console.warn(
+          `[@krutoo/jest-css-modules-transform] Unknown extension "${extname}", code of "${sourcePath}" will be interpreted as regular CSS`,
+        );
       }
     }
 
